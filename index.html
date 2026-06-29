@@ -1273,7 +1273,7 @@
                             <label>Pilih Produk <span class="required">*</span></label>
                             <div class="product-select-group" id="productGroup">
                                 <!-- Kopi O -->
-                                <label class="product-option" id="opt-kopi-o">
+                                <div class="product-option" id="opt-kopi-o">
                                     <input type="checkbox" name="product" value="kopi-o">
                                     <div class="product-check">
                                         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -1294,9 +1294,9 @@
                                     <div class="product-price-col">
                                         <span class="price" id="price-kopi-o">RM 2.00</span>
                                     </div>
-                                </label>
+                                </div>
                                 <!-- Kopi Latte -->
-                                <label class="product-option" id="opt-kopi-latte">
+                                <div class="product-option" id="opt-kopi-latte">
                                     <input type="checkbox" name="product" value="kopi-latte">
                                     <div class="product-check">
                                         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -1317,7 +1317,7 @@
                                     <div class="product-price-col">
                                         <span class="price" id="price-kopi-latte">RM 2.50</span>
                                     </div>
-                                </label>
+                                </div>
                             </div>
                             <span class="error-msg" id="product-error" style="display:none;">Sila pilih sekurang-kurangnya satu produk.</span>
                         </div>
@@ -1585,9 +1585,10 @@
                 isValid = false;
             }
 
-            // Validate phone
-            const phoneRegex = /^(\+?6?0)?[\s-]?1[0-9][\s-]?[0-9]{3,4}[\s-]?[0-9]{4}$/;
-            if (!telefon.value.trim() || !phoneRegex.test(telefon.value.replace(/[\s-]/g, ''))) {
+            // Validate phone (Malaysian format: 01X-XXXXXXX or +601X-XXXXXXX)
+            const cleanPhone = telefon.value.replace(/[\s\-()]/g, '');
+            const phoneRegex = /^(\+?6?0)1[0-9]{8,9}$/;
+            if (!cleanPhone || !phoneRegex.test(cleanPhone)) {
                 telefon.classList.add('error');
                 isValid = false;
             }
@@ -1659,8 +1660,10 @@
         // ===== SMOOTH SCROLL OFFSET =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return; // skip bare # links
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
