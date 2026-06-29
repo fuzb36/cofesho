@@ -50,6 +50,23 @@
             --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
+        /* Light theme override */
+        body.light-theme {
+            --color-bg: #faf7f4;
+            --color-bg-light: #f0ebe5;
+            --color-bg-card: #ffffff;
+            --color-surface: #f5f0eb;
+            --color-text: #1a1714;
+            --color-text-muted: #6b5e52;
+            --color-text-subtle: #9a8d80;
+            --color-border: rgba(100, 80, 60, 0.12);
+            --color-border-hover: rgba(100, 80, 60, 0.25);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 32px rgba(0,0,0,0.1);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+            --shadow-glow: 0 0 30px rgba(200, 149, 108, 0.1);
+        }
+
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
@@ -136,6 +153,10 @@
             padding: 10px 0;
         }
 
+        body.light-theme .navbar.scrolled {
+            background: rgba(250, 247, 244, 0.92);
+        }
+
         .navbar .container {
             display: flex;
             align-items: center;
@@ -188,7 +209,6 @@
             font-weight: 500;
             border-radius: var(--radius-sm);
             transition: var(--transition-fast);
-            position: relative;
         }
 
         .nav-links a:hover,
@@ -210,7 +230,6 @@
             box-shadow: var(--shadow-glow);
         }
 
-        /* Hamburger */
         .nav-toggle {
             display: none;
             flex-direction: column;
@@ -261,12 +280,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(15, 13, 10, 0.3) 0%,
-                rgba(15, 13, 10, 0.6) 50%,
-                rgba(15, 13, 10, 1) 100%
-            );
+            background: linear-gradient(180deg, rgba(15,13,10,0.3) 0%, rgba(15,13,10,0.6) 50%, var(--color-bg) 100%);
         }
 
         .hero-content {
@@ -310,6 +324,7 @@
             line-height: 1.1;
             margin-bottom: 24px;
             max-width: 700px;
+            color: #f5f0eb; /* always light in hero */
         }
 
         .hero h1 .highlight {
@@ -321,7 +336,7 @@
 
         .hero-desc {
             font-size: 1.15rem;
-            color: var(--color-text-muted);
+            color: #a89b8e;
             max-width: 500px;
             margin-bottom: 40px;
             line-height: 1.8;
@@ -350,7 +365,7 @@
 
         .btn-primary {
             background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-            color: var(--color-bg);
+            color: #0f0d0a;
             box-shadow: 0 4px 20px rgba(200, 149, 108, 0.3);
         }
 
@@ -361,8 +376,8 @@
 
         .btn-outline {
             background: transparent;
-            color: var(--color-text);
-            border: 1px solid var(--color-border-hover);
+            color: #f5f0eb;
+            border: 1px solid rgba(200, 149, 108, 0.35);
         }
 
         .btn-outline:hover {
@@ -375,7 +390,7 @@
             gap: 48px;
             margin-top: 64px;
             padding-top: 40px;
-            border-top: 1px solid var(--color-border);
+            border-top: 1px solid rgba(200, 149, 108, 0.15);
         }
 
         .hero-stat h3 {
@@ -387,7 +402,7 @@
 
         .hero-stat p {
             font-size: 0.85rem;
-            color: var(--color-text-muted);
+            color: #a89b8e;
             margin-top: 4px;
         }
 
@@ -417,7 +432,6 @@
             border-radius: var(--radius-lg);
             overflow: hidden;
             transition: var(--transition-smooth);
-            position: relative;
         }
 
         .menu-card:hover {
@@ -481,6 +495,7 @@
         .price-row {
             display: flex;
             gap: 12px;
+            flex-wrap: wrap;
             margin-bottom: 20px;
         }
 
@@ -495,21 +510,10 @@
             font-size: 0.85rem;
         }
 
-        .price-tag .type {
-            color: var(--color-text-muted);
-            font-weight: 400;
-        }
+        .price-tag .type { color: var(--color-text-muted); font-weight: 400; }
+        .price-tag .amount { color: var(--color-primary-light); font-weight: 700; font-size: 1rem; }
 
-        .price-tag .amount {
-            color: var(--color-primary-light);
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .menu-card .btn {
-            width: 100%;
-            justify-content: center;
-        }
+        .menu-card .btn { width: 100%; justify-content: center; }
 
         /* ===== ORDER SECTION ===== */
         .order {
@@ -521,9 +525,7 @@
         .order::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--color-primary-dark), transparent);
         }
@@ -557,41 +559,18 @@
             line-height: 1.7;
         }
 
-        .order-features {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .order-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
+        .order-features { display: flex; flex-direction: column; gap: 20px; }
+        .order-feature { display: flex; align-items: flex-start; gap: 16px; }
         .order-feature-icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
+            width: 44px; height: 44px; min-width: 44px;
             background: rgba(200, 149, 108, 0.1);
             border: 1px solid var(--color-border);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-size: 1.2rem;
         }
-
-        .order-feature h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .order-feature p {
-            font-size: 0.85rem;
-            color: var(--color-text-muted);
-        }
+        .order-feature h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+        .order-feature p { font-size: 0.85rem; color: var(--color-text-muted); }
 
         /* Form Card */
         .form-card {
@@ -607,45 +586,20 @@
         .form-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--color-primary), var(--color-gold), var(--color-primary));
         }
 
-        .form-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+        .form-card h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; }
+        .form-card > p { color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 32px; }
 
-        .form-card > p {
-            color: var(--color-text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 32px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--color-text-muted);
-            margin-bottom: 8px;
-        }
-
-        .form-group label .required {
-            color: var(--color-primary);
-        }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--color-text-muted); margin-bottom: 8px; }
+        .form-group label .required { color: var(--color-primary); }
 
         .form-control {
-            width: 100%;
-            padding: 14px 18px;
+            width: 100%; padding: 14px 18px;
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-sm);
@@ -655,300 +609,102 @@
             transition: var(--transition-fast);
             outline: none;
         }
-
-        .form-control::placeholder {
-            color: var(--color-text-subtle);
-        }
-
-        .form-control:focus {
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(200, 149, 108, 0.15);
-        }
-
-        .form-control.error {
-            border-color: var(--color-error);
-            box-shadow: 0 0 0 3px rgba(224, 96, 96, 0.15);
-        }
-
-        .error-msg {
-            color: var(--color-error);
-            font-size: 0.78rem;
-            margin-top: 6px;
-            display: none;
-        }
-
-        .form-control.error + .error-msg {
-            display: block;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 100px;
-        }
+        .form-control::placeholder { color: var(--color-text-subtle); }
+        .form-control:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(200,149,108,0.15); }
+        .form-control.error { border-color: var(--color-error); box-shadow: 0 0 0 3px rgba(224,96,96,0.15); }
+        .error-msg { color: var(--color-error); font-size: 0.78rem; margin-top: 6px; display: none; }
+        .form-control.error + .error-msg { display: block; }
+        textarea.form-control { resize: vertical; min-height: 100px; }
 
         /* Product Select */
-        .product-select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .product-select-group { display: flex; flex-direction: column; gap: 12px; }
         .product-option {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px;
+            display: flex; align-items: center; gap: 16px; padding: 16px;
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: var(--transition-fast);
+            cursor: pointer; transition: var(--transition-fast);
         }
-
-        .product-option:hover {
-            border-color: var(--color-border-hover);
-        }
-
-        .product-option.selected {
-            border-color: var(--color-primary);
-            background: rgba(200, 149, 108, 0.06);
-        }
-
-        .product-option input[type="checkbox"] {
-            display: none;
-        }
-
+        .product-option:hover { border-color: var(--color-border-hover); }
+        .product-option.selected { border-color: var(--color-primary); background: rgba(200,149,108,0.06); }
+        .product-option input[type="checkbox"] { display: none; }
         .product-check {
-            width: 22px;
-            height: 22px;
-            min-width: 22px;
+            width: 22px; height: 22px; min-width: 22px;
             border: 2px solid var(--color-text-subtle);
             border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             transition: var(--transition-fast);
         }
+        .product-option.selected .product-check { background: var(--color-primary); border-color: var(--color-primary); }
+        .product-check svg { width: 14px; height: 14px; stroke: #0f0d0a; stroke-width: 3; fill: none; opacity: 0; transition: var(--transition-fast); }
+        .product-option.selected .product-check svg { opacity: 1; }
+        .product-details { flex: 1; }
+        .product-details h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+        .product-details > span { font-size: 0.8rem; color: var(--color-text-muted); }
+        .product-price-col { text-align: right; }
+        .product-price-col .price { font-weight: 700; color: var(--color-primary-light); font-size: 0.95rem; }
 
-        .product-option.selected .product-check {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
-        }
-
-        .product-check svg {
-            width: 14px;
-            height: 14px;
-            stroke: var(--color-bg);
-            stroke-width: 3;
-            fill: none;
-            opacity: 0;
-            transition: var(--transition-fast);
-        }
-
-        .product-option.selected .product-check svg {
-            opacity: 1;
-        }
-
-        .product-details {
-            flex: 1;
-        }
-
-        .product-details h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .product-details span {
-            font-size: 0.8rem;
-            color: var(--color-text-muted);
-        }
-
-        .product-price-col {
-            text-align: right;
-        }
-
-        .product-price-col .price {
-            font-weight: 700;
-            color: var(--color-primary-light);
-            font-size: 0.95rem;
-        }
-
-        /* Variant select */
-        .variant-select {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
+        .variant-select { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
         .variant-btn {
-            padding: 4px 14px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 100px;
-            border: 1px solid var(--color-border);
-            background: transparent;
-            color: var(--color-text-muted);
-            cursor: pointer;
-            transition: var(--transition-fast);
-            font-family: var(--font-body);
+            padding: 4px 14px; font-size: 0.75rem; font-weight: 600;
+            border-radius: 100px; border: 1px solid var(--color-border);
+            background: transparent; color: var(--color-text-muted);
+            cursor: pointer; transition: var(--transition-fast); font-family: var(--font-body);
         }
+        .variant-btn.active { background: var(--color-primary); border-color: var(--color-primary); color: #0f0d0a; }
+        .variant-btn:hover:not(.active) { border-color: var(--color-primary); color: var(--color-primary-light); }
 
-        .variant-btn.active {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
-            color: var(--color-bg);
-        }
-
-        .variant-btn:hover:not(.active) {
-            border-color: var(--color-primary);
-            color: var(--color-primary-light);
-        }
-
-        /* Quantity */
-        .qty-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 8px;
-        }
-
+        .qty-wrapper { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
         .qty-btn {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
+            width: 30px; height: 30px; border-radius: 8px;
             border: 1px solid var(--color-border);
-            background: var(--color-surface);
-            color: var(--color-text);
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition-fast);
-            font-family: var(--font-body);
+            background: var(--color-surface); color: var(--color-text);
+            font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transition-fast); font-family: var(--font-body);
         }
+        .qty-btn:hover { border-color: var(--color-primary); background: rgba(200,149,108,0.1); }
+        .qty-value { font-weight: 600; font-size: 0.9rem; min-width: 20px; text-align: center; }
 
-        .qty-btn:hover {
-            border-color: var(--color-primary);
-            background: rgba(200, 149, 108, 0.1);
-        }
-
-        .qty-value {
-            font-weight: 600;
-            font-size: 0.9rem;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .form-submit-btn {
-            width: 100%;
-            padding: 16px;
-            font-size: 1rem;
-            margin-top: 8px;
-        }
-
-        .form-submit-btn .wa-icon {
-            width: 20px;
-            height: 20px;
-        }
+        .form-submit-btn { width: 100%; padding: 16px; font-size: 1rem; margin-top: 8px; }
+        .form-submit-btn .wa-icon { width: 20px; height: 20px; }
 
         /* Order Summary */
         .order-summary {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-md);
-            padding: 20px;
-            margin-bottom: 24px;
-            display: none;
+            padding: 20px; margin-bottom: 24px; display: none;
         }
-
-        .order-summary.visible {
-            display: block;
-        }
-
-        .order-summary h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--color-primary-light);
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            padding: 6px 0;
-            color: var(--color-text-muted);
-        }
-
+        .order-summary.visible { display: block; }
+        .order-summary h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; color: var(--color-primary-light); }
+        .summary-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 6px 0; color: var(--color-text-muted); }
         .summary-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1rem;
-            font-weight: 700;
-            padding-top: 12px;
-            margin-top: 8px;
-            border-top: 1px solid var(--color-border);
-            color: var(--color-text);
+            display: flex; justify-content: space-between; font-size: 1rem; font-weight: 700;
+            padding-top: 12px; margin-top: 8px;
+            border-top: 1px solid var(--color-border); color: var(--color-text);
         }
 
         /* ===== MAPS SECTION ===== */
-        .location {
-            padding: 100px 0;
-        }
-
-        .location-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .location-header .section-subtitle {
-            margin: 0 auto;
-        }
-
+        .location { padding: 100px 0; }
+        .location-header { text-align: center; margin-bottom: 48px; }
+        .location-header .section-subtitle { margin: 0 auto; }
         .map-wrapper {
-            border-radius: var(--radius-lg);
-            overflow: hidden;
+            border-radius: var(--radius-lg); overflow: hidden;
             border: 1px solid var(--color-border);
-            box-shadow: var(--shadow-md);
-            position: relative;
+            box-shadow: var(--shadow-md); position: relative;
         }
-
-        .map-wrapper iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-            display: block;
-        }
-
-        .map-overlay-link {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            z-index: 10;
-        }
-
+        .map-wrapper iframe { width: 100%; height: 450px; border: none; display: block; }
+        .map-overlay-link { position: absolute; bottom: 20px; right: 20px; z-index: 10; }
         .map-overlay-link a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-flex; align-items: center; gap: 8px;
             padding: 12px 24px;
-            background: rgba(15, 13, 10, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            color: var(--color-primary-light);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: var(--transition-fast);
+            background: rgba(15,13,10,0.85); backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+            color: var(--color-primary-light); text-decoration: none;
+            font-size: 0.85rem; font-weight: 600; transition: var(--transition-fast);
         }
-
-        .map-overlay-link a:hover {
-            background: rgba(15, 13, 10, 0.95);
-            border-color: var(--color-primary);
-        }
+        .map-overlay-link a:hover { background: rgba(15,13,10,0.95); border-color: var(--color-primary); }
 
         /* ===== FOOTER ===== */
         .footer {
@@ -964,137 +720,58 @@
             margin-bottom: 48px;
         }
 
-        .footer-brand p {
-            color: var(--color-text-muted);
-            font-size: 0.9rem;
-            margin-top: 16px;
-            line-height: 1.7;
-            max-width: 320px;
-        }
-
-        .footer h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--color-text-muted);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .footer-links a {
-            color: var(--color-text-subtle);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: var(--transition-fast);
-        }
-
-        .footer-links a:hover {
-            color: var(--color-primary-light);
-        }
+        .footer-brand p { color: var(--color-text-muted); font-size: 0.9rem; margin-top: 16px; line-height: 1.7; max-width: 320px; }
+        .footer h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--color-text-muted); margin-bottom: 20px; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { color: var(--color-text-subtle); text-decoration: none; font-size: 0.9rem; transition: var(--transition-fast); }
+        .footer-links a:hover { color: var(--color-primary-light); }
 
         .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 24px;
-            border-top: 1px solid var(--color-border);
-            font-size: 0.8rem;
-            color: var(--color-text-subtle);
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 24px; border-top: 1px solid var(--color-border);
+            font-size: 0.8rem; color: var(--color-text-subtle);
         }
+
+        .admin-link {
+            color: var(--color-text-subtle); text-decoration: none; font-size: 0.75rem;
+            opacity: 0.5; transition: var(--transition-fast);
+        }
+        .admin-link:hover { opacity: 1; color: var(--color-primary-light); }
 
         /* ===== ANIMATIONS ===== */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* ===== TOAST ===== */
         .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 16px 24px;
-            background: var(--color-bg-card);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            color: var(--color-text);
-            font-size: 0.9rem;
-            box-shadow: var(--shadow-lg);
-            z-index: 9999;
-            transform: translateX(120%);
-            transition: var(--transition-spring);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            position: fixed; bottom: 30px; right: 30px;
+            padding: 16px 24px; background: var(--color-bg-card);
+            border: 1px solid var(--color-border); border-radius: var(--radius-md);
+            color: var(--color-text); font-size: 0.9rem;
+            box-shadow: var(--shadow-lg); z-index: 9999;
+            transform: translateX(120%); transition: var(--transition-spring);
+            display: flex; align-items: center; gap: 12px;
         }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
+        .toast.show { transform: translateX(0); }
         .toast.success { border-left: 3px solid var(--color-success); }
         .toast.error { border-left: 3px solid var(--color-error); }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 280px;
-                height: 100vh;
-                background: var(--color-bg-light);
-                flex-direction: column;
-                padding: 100px 32px 32px;
-                gap: 4px;
-                border-left: 1px solid var(--color-border);
-                transition: var(--transition-smooth);
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+                background: var(--color-bg-light); flex-direction: column;
+                padding: 100px 32px 32px; gap: 4px;
+                border-left: 1px solid var(--color-border); transition: var(--transition-smooth);
             }
-
             .nav-links.open { right: 0; }
-
             .nav-toggle { display: flex; }
-
-            .hero-stats {
-                gap: 24px;
-                flex-wrap: wrap;
-            }
-
-            .order-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-card {
-                padding: 28px 20px;
-            }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .order-wrapper { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .form-card { padding: 28px 20px; }
         }
     </style>
 </head>
@@ -1105,7 +782,7 @@
         <div class="container">
             <a href="#" class="nav-brand">
                 <div class="nav-logo">☕</div>
-                <div class="nav-brand-text">Kedai <span>Kopi</span></div>
+                <div class="nav-brand-text" id="navBrandText">Kedai <span>Kopi</span></div>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#hero" class="active">Utama</a></li>
@@ -1115,9 +792,7 @@
                 <li><a href="#order" class="nav-cta">Pesan Sekarang</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
@@ -1132,34 +807,21 @@
                 <span class="dot"></span>
                 Kini Dibuka — Pesan Sekarang
             </div>
-            <h1>Kopi Segar,<br><span class="highlight">Rasa Tradisi.</span></h1>
-            <p class="hero-desc">Nikmati kopi tradisional Malaysia yang disediakan dengan penuh kasih sayang. Setiap cawan membawa cerita dan kehangatan kampung.</p>
+            <h1 id="heroTitle">Kopi Segar,<br><span class="highlight">Rasa Tradisi.</span></h1>
+            <p class="hero-desc" id="heroDesc">Nikmati kopi tradisional Malaysia yang disediakan dengan penuh kasih sayang. Setiap cawan membawa cerita dan kehangatan kampung.</p>
             <div class="hero-actions">
-                <a href="#menu" class="btn btn-primary">
-                    ☕ Lihat Menu
-                </a>
-                <a href="#order" class="btn btn-outline">
-                    📱 Pesan via WhatsApp
-                </a>
+                <a href="#menu" class="btn btn-primary">☕ Lihat Menu</a>
+                <a href="#order" class="btn btn-outline">📱 Pesan via WhatsApp</a>
             </div>
             <div class="hero-stats">
-                <div class="hero-stat fade-in">
-                    <h3>100%</h3>
-                    <p>Biji Kopi Tempatan</p>
-                </div>
-                <div class="hero-stat fade-in">
-                    <h3>500+</h3>
-                    <p>Pelanggan Gembira</p>
-                </div>
-                <div class="hero-stat fade-in">
-                    <h3>4.9★</h3>
-                    <p>Rating Pelanggan</p>
-                </div>
+                <div class="hero-stat fade-in"><h3>100%</h3><p>Biji Kopi Tempatan</p></div>
+                <div class="hero-stat fade-in"><h3>500+</h3><p>Pelanggan Gembira</p></div>
+                <div class="hero-stat fade-in"><h3>4.9★</h3><p>Rating Pelanggan</p></div>
             </div>
         </div>
     </section>
 
-    <!-- ===== MENU SECTION ===== -->
+    <!-- ===== MENU SECTION (Dynamic) ===== -->
     <section class="menu" id="menu">
         <div class="container">
             <div class="menu-header fade-in">
@@ -1167,56 +829,13 @@
                 <h2 class="section-title">Pilihan Kopi Istimewa</h2>
                 <p class="section-subtitle">Dipilih khas untuk anda — kopi berkualiti tinggi dengan harga mampu milik.</p>
             </div>
-            <div class="menu-grid">
-                <!-- Kopi O -->
-                <div class="menu-card fade-in">
-                    <div class="menu-card-image">
-                        <img src="images/kopi-o.png" alt="Kopi O">
-                        <span class="badge">Popular</span>
-                    </div>
-                    <div class="menu-card-body">
-                        <h3>Kopi O</h3>
-                        <p class="desc">Kopi hitam tradisional Malaysia yang pekat dan harum. Diperbuat daripada biji kopi tempatan yang disangai sempurna.</p>
-                        <div class="price-row">
-                            <div class="price-tag">
-                                <span class="type">🔥 Panas</span>
-                                <span class="amount">RM 2.00</span>
-                            </div>
-                            <div class="price-tag">
-                                <span class="type">🧊 Sejuk</span>
-                                <span class="amount">RM 2.50</span>
-                            </div>
-                        </div>
-                        <a href="#order" class="btn btn-primary">Pesan Sekarang</a>
-                    </div>
-                </div>
-                <!-- Kopi Latte -->
-                <div class="menu-card fade-in">
-                    <div class="menu-card-image">
-                        <img src="images/kopi-latte.png" alt="Kopi Latte">
-                        <span class="badge">Premium</span>
-                    </div>
-                    <div class="menu-card-body">
-                        <h3>Kopi Latte</h3>
-                        <p class="desc">Gabungan sempurna espresso dan susu berbuih yang creamy. Sesuai untuk pencinta kopi yang lebih lembut rasanya.</p>
-                        <div class="price-row">
-                            <div class="price-tag">
-                                <span class="type">🔥 Panas</span>
-                                <span class="amount">RM 2.50</span>
-                            </div>
-                            <div class="price-tag">
-                                <span class="type">🧊 Sejuk</span>
-                                <span class="amount">RM 3.00</span>
-                            </div>
-                        </div>
-                        <a href="#order" class="btn btn-primary">Pesan Sekarang</a>
-                    </div>
-                </div>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Rendered dynamically by JS -->
             </div>
         </div>
     </section>
 
-    <!-- ===== ORDER SECTION ===== -->
+    <!-- ===== ORDER SECTION (Dynamic) ===== -->
     <section class="order" id="order">
         <div class="container">
             <div class="order-wrapper">
@@ -1227,24 +846,15 @@
                     <div class="order-features">
                         <div class="order-feature">
                             <div class="order-feature-icon">📱</div>
-                            <div>
-                                <h4>Pesanan WhatsApp</h4>
-                                <p>Terus ke WhatsApp — tiada perlu muat turun aplikasi.</p>
-                            </div>
+                            <div><h4>Pesanan WhatsApp</h4><p>Terus ke WhatsApp — tiada perlu muat turun aplikasi.</p></div>
                         </div>
                         <div class="order-feature">
                             <div class="order-feature-icon">⚡</div>
-                            <div>
-                                <h4>Respons Pantas</h4>
-                                <p>Kami akan sahkan pesanan anda dalam masa 5 minit.</p>
-                            </div>
+                            <div><h4>Respons Pantas</h4><p>Kami akan sahkan pesanan anda dalam masa 5 minit.</p></div>
                         </div>
                         <div class="order-feature">
                             <div class="order-feature-icon">🛵</div>
-                            <div>
-                                <h4>Penghantaran Percuma</h4>
-                                <p>Penghantaran percuma dalam radius 5km.</p>
-                            </div>
+                            <div><h4>Penghantaran Percuma</h4><p>Penghantaran percuma dalam radius 5km.</p></div>
                         </div>
                     </div>
                 </div>
@@ -1272,57 +882,11 @@
                         <div class="form-group">
                             <label>Pilih Produk <span class="required">*</span></label>
                             <div class="product-select-group" id="productGroup">
-                                <!-- Kopi O -->
-                                <div class="product-option" id="opt-kopi-o">
-                                    <input type="checkbox" name="product" value="kopi-o">
-                                    <div class="product-check">
-                                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                    </div>
-                                    <div class="product-details">
-                                        <h4>Kopi O</h4>
-                                        <span>Kopi hitam tradisional</span>
-                                        <div class="variant-select">
-                                            <button type="button" class="variant-btn active" data-variant="panas" data-price="2.00" onclick="selectVariant(this, 'kopi-o')">🔥 Panas</button>
-                                            <button type="button" class="variant-btn" data-variant="sejuk" data-price="2.50" onclick="selectVariant(this, 'kopi-o')">🧊 Sejuk</button>
-                                        </div>
-                                        <div class="qty-wrapper">
-                                            <button type="button" class="qty-btn" onclick="changeQty('kopi-o', -1)">−</button>
-                                            <span class="qty-value" id="qty-kopi-o">1</span>
-                                            <button type="button" class="qty-btn" onclick="changeQty('kopi-o', 1)">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-col">
-                                        <span class="price" id="price-kopi-o">RM 2.00</span>
-                                    </div>
-                                </div>
-                                <!-- Kopi Latte -->
-                                <div class="product-option" id="opt-kopi-latte">
-                                    <input type="checkbox" name="product" value="kopi-latte">
-                                    <div class="product-check">
-                                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                    </div>
-                                    <div class="product-details">
-                                        <h4>Kopi Latte</h4>
-                                        <span>Espresso + susu berbuih</span>
-                                        <div class="variant-select">
-                                            <button type="button" class="variant-btn active" data-variant="panas" data-price="2.50" onclick="selectVariant(this, 'kopi-latte')">🔥 Panas</button>
-                                            <button type="button" class="variant-btn" data-variant="sejuk" data-price="3.00" onclick="selectVariant(this, 'kopi-latte')">🧊 Sejuk</button>
-                                        </div>
-                                        <div class="qty-wrapper">
-                                            <button type="button" class="qty-btn" onclick="changeQty('kopi-latte', -1)">−</button>
-                                            <span class="qty-value" id="qty-kopi-latte">1</span>
-                                            <button type="button" class="qty-btn" onclick="changeQty('kopi-latte', 1)">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-col">
-                                        <span class="price" id="price-kopi-latte">RM 2.50</span>
-                                    </div>
-                                </div>
+                                <!-- Rendered dynamically by JS -->
                             </div>
                             <span class="error-msg" id="product-error" style="display:none;">Sila pilih sekurang-kurangnya satu produk.</span>
                         </div>
 
-                        <!-- Order Summary -->
                         <div class="order-summary" id="orderSummary">
                             <h4>📋 Ringkasan Pesanan</h4>
                             <div id="summaryItems"></div>
@@ -1342,7 +906,7 @@
         </div>
     </section>
 
-    <!-- ===== LOCATION SECTION ===== -->
+    <!-- ===== LOCATION SECTION (Dynamic) ===== -->
     <section class="location" id="location">
         <div class="container">
             <div class="location-header fade-in">
@@ -1350,19 +914,8 @@
                 <h2 class="section-title">Cari Kami Di Sini</h2>
                 <p class="section-subtitle">Jom singgah ke kedai kami untuk menikmati kopi segar terus dari dapur.</p>
             </div>
-            <div class="map-wrapper fade-in">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.381!2d101.7!3d2.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwNTQnMDAuMCJOIDEwMcKwNDInMDAuMCJF!5e0!3m2!1sms!2smy!4v1700000000000!5m2!1sms!2smy"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="Lokasi Kedai Kopi Digital">
-                </iframe>
-                <div class="map-overlay-link">
-                    <a href="https://maps.app.goo.gl/hFNL7c4q9wFsR2uJB" target="_blank" rel="noopener noreferrer">
-                        📍 Buka di Google Maps
-                    </a>
-                </div>
+            <div class="map-wrapper fade-in" id="mapWrapper">
+                <!-- Rendered dynamically by JS -->
             </div>
         </div>
     </section>
@@ -1374,9 +927,9 @@
                 <div class="footer-brand">
                     <a href="#" class="nav-brand">
                         <div class="nav-logo">☕</div>
-                        <div class="nav-brand-text">Kedai <span>Kopi</span></div>
+                        <div class="nav-brand-text" id="footerBrand">Kedai <span>Kopi</span></div>
                     </a>
-                    <p>Kopi tradisional Malaysia yang disediakan dengan penuh kasih sayang. Setiap cawan membawa cerita dan kehangatan.</p>
+                    <p id="footerDesc">Kopi tradisional Malaysia yang disediakan dengan penuh kasih sayang. Setiap cawan membawa cerita dan kehangatan.</p>
                 </div>
                 <div>
                     <h4>Navigasi</h4>
@@ -1390,15 +943,17 @@
                 <div>
                     <h4>Hubungi Kami</h4>
                     <ul class="footer-links">
-                        <li><a href="https://wa.me/60123456789" target="_blank">📱 WhatsApp</a></li>
-                        <li><a href="https://maps.app.goo.gl/hFNL7c4q9wFsR2uJB" target="_blank">📍 Google Maps</a></li>
-                        <li><a href="#">📧 Email</a></li>
+                        <li><a id="footerWA" href="#" target="_blank">📱 WhatsApp</a></li>
+                        <li><a id="footerMaps" href="#" target="_blank">📍 Google Maps</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Kedai Kopi Digital. Hak Cipta Terpelihara.</p>
-                <p>Dibina dengan ☕ dan ❤️</p>
+                <div style="display:flex;align-items:center;gap:16px">
+                    <p>Dibina dengan ☕ dan ❤️</p>
+                    <a href="admin.html" class="admin-link" title="Admin Panel">⚙️</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -1407,26 +962,312 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // ===== CONFIGURATION =====
-        const WA_PHONE = '60123456789'; // Ganti dengan nombor WhatsApp anda
-
-        // ===== PRODUCT DATA =====
-        const products = {
-            'kopi-o': {
-                name: 'Kopi O',
-                variants: { panas: 2.00, sejuk: 2.50 },
-                selectedVariant: 'panas',
-                qty: 1,
-                selected: false
+        // ===== DEFAULT CONFIG =====
+        const DEFAULT_CONFIG = {
+            store: {
+                name: 'Kedai Kopi Digital',
+                tagline: 'Kopi Segar, Rasa Tradisi',
+                description: 'Nikmati kopi tradisional Malaysia yang disediakan dengan penuh kasih sayang. Setiap cawan membawa cerita dan kehangatan kampung.',
+                whatsapp: '60123456789'
             },
-            'kopi-latte': {
-                name: 'Kopi Latte',
-                variants: { panas: 2.50, sejuk: 3.00 },
-                selectedVariant: 'panas',
-                qty: 1,
-                selected: false
-            }
+            menu: [
+                {
+                    id: 'kopi-o', name: 'Kopi O',
+                    description: 'Kopi hitam tradisional Malaysia yang pekat dan harum. Diperbuat daripada biji kopi tempatan yang disangai sempurna.',
+                    badge: 'Popular', image: 'images/kopi-o.png',
+                    variants: [{ name: 'Panas', emoji: '🔥', price: 2.00 },{ name: 'Sejuk', emoji: '🧊', price: 2.50 }]
+                },
+                {
+                    id: 'kopi-latte', name: 'Kopi Latte',
+                    description: 'Gabungan sempurna espresso dan susu berbuih yang creamy. Sesuai untuk pencinta kopi yang lebih lembut rasanya.',
+                    badge: 'Premium', image: 'images/kopi-latte.png',
+                    variants: [{ name: 'Panas', emoji: '🔥', price: 2.50 },{ name: 'Sejuk', emoji: '🧊', price: 3.00 }]
+                }
+            ],
+            location: {
+                embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.381!2d101.7!3d2.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwNTQnMDAuMCJOIDEwMcKwNDInMDAuMCJF!5e0!3m2!1sms!2smy!4v1700000000000!5m2!1sms!2smy',
+                mapsLink: 'https://maps.app.goo.gl/hFNL7c4q9wFsR2uJB',
+                address: ''
+            },
+            theme: { mode: 'dark', primaryColor: '#c8956c' }
         };
+
+        // ===== LOAD CONFIG =====
+        let config;
+        try {
+            const saved = localStorage.getItem('kedaikopi_config');
+            config = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+        } catch(e) {
+            config = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+        }
+        // Merge defaults
+        if (!config.store) config.store = {...DEFAULT_CONFIG.store};
+        if (!config.menu) config.menu = [...DEFAULT_CONFIG.menu];
+        if (!config.location) config.location = {...DEFAULT_CONFIG.location};
+        if (!config.theme) config.theme = {...DEFAULT_CONFIG.theme};
+
+        // ===== PRODUCT STATE (for order form) =====
+        const productState = {};
+
+        // ===== APPLY THEME =====
+        function applyTheme() {
+            // Mode
+            if (config.theme.mode === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+            // Primary color
+            const pc = config.theme.primaryColor || '#c8956c';
+            document.documentElement.style.setProperty('--color-primary', pc);
+            // Generate lighter and darker variants
+            const hsl = hexToHSL(pc);
+            if (hsl) {
+                document.documentElement.style.setProperty('--color-primary-light', `hsl(${hsl.h}, ${Math.min(hsl.s+10,100)}%, ${Math.min(hsl.l+15,90)}%)`);
+                document.documentElement.style.setProperty('--color-primary-dark', `hsl(${hsl.h}, ${hsl.s}%, ${Math.max(hsl.l-12,20)}%)`);
+                document.documentElement.style.setProperty('--color-gold', `hsl(${(hsl.h+15)%360}, ${Math.min(hsl.s+5,100)}%, ${Math.min(hsl.l+20,85)}%)`);
+            }
+        }
+
+        function hexToHSL(hex) {
+            hex = hex.replace('#','');
+            if (hex.length !== 6) return null;
+            let r = parseInt(hex.substr(0,2),16)/255;
+            let g = parseInt(hex.substr(2,2),16)/255;
+            let b = parseInt(hex.substr(4,2),16)/255;
+            const max = Math.max(r,g,b), min = Math.min(r,g,b);
+            let h, s, l = (max+min)/2;
+            if (max === min) { h = s = 0; }
+            else {
+                const d = max - min;
+                s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+                switch(max) {
+                    case r: h = ((g-b)/d + (g < b ? 6 : 0))/6; break;
+                    case g: h = ((b-r)/d + 2)/6; break;
+                    case b: h = ((r-g)/d + 4)/6; break;
+                }
+            }
+            return { h: Math.round(h*360), s: Math.round(s*100), l: Math.round(l*100) };
+        }
+
+        // ===== RENDER STORE INFO =====
+        function renderStoreInfo() {
+            const s = config.store;
+            document.title = s.name + ' — ' + s.tagline;
+            // Hero
+            const parts = s.tagline.split(',');
+            if (parts.length >= 2) {
+                document.getElementById('heroTitle').innerHTML = parts[0].trim() + ',<br><span class="highlight">' + parts.slice(1).join(',').trim() + '</span>';
+            } else {
+                document.getElementById('heroTitle').innerHTML = '<span class="highlight">' + s.tagline + '</span>';
+            }
+            document.getElementById('heroDesc').textContent = s.description;
+            // Footer
+            document.getElementById('footerDesc').textContent = s.description;
+            document.getElementById('footerWA').href = 'https://wa.me/' + s.whatsapp;
+            document.getElementById('footerMaps').href = config.location.mapsLink || '#';
+        }
+
+        // ===== RENDER MENU =====
+        function renderMenuCards() {
+            const grid = document.getElementById('menuGrid');
+            if (config.menu.length === 0) {
+                grid.innerHTML = '<p style="text-align:center;color:var(--color-text-muted);grid-column:1/-1;padding:48px 0">Menu sedang dikemas kini. Sila kembali kemudian.</p>';
+                return;
+            }
+            grid.innerHTML = config.menu.map(item => {
+                const variantsHtml = item.variants.map(v =>
+                    `<div class="price-tag"><span class="type">${v.emoji} ${v.name}</span><span class="amount">RM ${v.price.toFixed(2)}</span></div>`
+                ).join('');
+                return `
+                <div class="menu-card fade-in">
+                    ${item.image ? `<div class="menu-card-image"><img src="${item.image}" alt="${item.name}" onerror="this.parentElement.style.display='none'">${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</div>` : ''}
+                    <div class="menu-card-body">
+                        <h3>${item.name}</h3>
+                        <p class="desc">${item.description || ''}</p>
+                        <div class="price-row">${variantsHtml}</div>
+                        <a href="#order" class="btn btn-primary">Pesan Sekarang</a>
+                    </div>
+                </div>`;
+            }).join('');
+            // Re-observe fade-in elements
+            grid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // ===== RENDER ORDER PRODUCTS =====
+        function renderOrderProducts() {
+            const group = document.getElementById('productGroup');
+            // Initialize product states
+            Object.keys(productState).forEach(k => delete productState[k]);
+            config.menu.forEach(item => {
+                productState[item.id] = {
+                    name: item.name,
+                    variants: {},
+                    selectedVariant: item.variants[0]?.name || '',
+                    qty: 1,
+                    selected: false
+                };
+                item.variants.forEach(v => {
+                    productState[item.id].variants[v.name] = { emoji: v.emoji, price: v.price };
+                });
+            });
+
+            group.innerHTML = config.menu.map(item => {
+                const firstVariant = item.variants[0];
+                const variantBtns = item.variants.map((v, i) =>
+                    `<button type="button" class="variant-btn ${i===0?'active':''}" data-variant="${v.name}" data-price="${v.price}" onclick="selectVariant(this,'${item.id}')">${v.emoji} ${v.name}</button>`
+                ).join('');
+                return `
+                <div class="product-option" id="opt-${item.id}">
+                    <input type="checkbox" name="product" value="${item.id}">
+                    <div class="product-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <div class="product-details">
+                        <h4>${item.name}</h4>
+                        <span>${item.description ? item.description.substring(0,40)+'...' : ''}</span>
+                        <div class="variant-select">${variantBtns}</div>
+                        <div class="qty-wrapper">
+                            <button type="button" class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+                            <span class="qty-value" id="qty-${item.id}">1</span>
+                            <button type="button" class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+                        </div>
+                    </div>
+                    <div class="product-price-col">
+                        <span class="price" id="price-${item.id}">RM ${firstVariant ? firstVariant.price.toFixed(2) : '0.00'}</span>
+                    </div>
+                </div>`;
+            }).join('');
+
+            // Bind click events for product selection
+            group.querySelectorAll('.product-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    if (e.target.closest('.variant-btn') || e.target.closest('.qty-btn')) return;
+                    const checkbox = option.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                    option.classList.toggle('selected', checkbox.checked);
+                    const pid = checkbox.value;
+                    productState[pid].selected = checkbox.checked;
+                    updateSummary();
+                });
+            });
+        }
+
+        // ===== RENDER LOCATION =====
+        function renderLocation() {
+            const loc = config.location;
+            const wrapper = document.getElementById('mapWrapper');
+            wrapper.innerHTML = `
+                <iframe src="${loc.embedUrl || ''}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Kedai Kopi Digital"></iframe>
+                <div class="map-overlay-link">
+                    <a href="${loc.mapsLink || '#'}" target="_blank" rel="noopener noreferrer">📍 Buka di Google Maps</a>
+                </div>
+            `;
+        }
+
+        // ===== VARIANT SELECT =====
+        function selectVariant(btn, productId) {
+            const parent = btn.closest('.variant-select');
+            parent.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            productState[productId].selectedVariant = btn.dataset.variant;
+            const price = parseFloat(btn.dataset.price);
+            const qty = productState[productId].qty;
+            document.getElementById('price-' + productId).textContent = 'RM ' + (price * qty).toFixed(2);
+            updateSummary();
+        }
+
+        // ===== QUANTITY =====
+        function changeQty(productId, delta) {
+            const ps = productState[productId];
+            ps.qty = Math.max(1, Math.min(20, ps.qty + delta));
+            document.getElementById('qty-' + productId).textContent = ps.qty;
+            const activeBtn = document.querySelector('#opt-' + productId + ' .variant-btn.active');
+            const unitPrice = activeBtn ? parseFloat(activeBtn.dataset.price) : 0;
+            document.getElementById('price-' + productId).textContent = 'RM ' + (unitPrice * ps.qty).toFixed(2);
+            updateSummary();
+        }
+
+        // ===== ORDER SUMMARY =====
+        function updateSummary() {
+            const summaryEl = document.getElementById('orderSummary');
+            const itemsEl = document.getElementById('summaryItems');
+            const totalEl = document.getElementById('summaryTotal');
+            let items = [], total = 0;
+
+            Object.keys(productState).forEach(id => {
+                const ps = productState[id];
+                if (ps.selected && ps.variants[ps.selectedVariant]) {
+                    const v = ps.variants[ps.selectedVariant];
+                    const lineTotal = v.price * ps.qty;
+                    total += lineTotal;
+                    items.push({ name: ps.name + ' (' + v.emoji + ' ' + ps.selectedVariant + ') x' + ps.qty, price: lineTotal });
+                }
+            });
+
+            if (items.length > 0) {
+                summaryEl.classList.add('visible');
+                itemsEl.innerHTML = items.map(i => '<div class="summary-item"><span>' + i.name + '</span><span>RM ' + i.price.toFixed(2) + '</span></div>').join('');
+                totalEl.textContent = 'RM ' + total.toFixed(2);
+            } else {
+                summaryEl.classList.remove('visible');
+            }
+            document.getElementById('product-error').style.display = 'none';
+        }
+
+        // ===== FORM SUBMIT =====
+        const form = document.getElementById('orderForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            const nama = document.getElementById('nama');
+            const telefon = document.getElementById('telefon');
+            const alamat = document.getElementById('alamat');
+
+            [nama, telefon, alamat].forEach(el => el.classList.remove('error'));
+            document.getElementById('product-error').style.display = 'none';
+
+            if (nama.value.trim().length < 2) { nama.classList.add('error'); isValid = false; }
+
+            const cleanPhone = telefon.value.replace(/[\s\-()]/g, '');
+            const phoneRegex = /^(\+?6?0)1[0-9]{8,9}$/;
+            if (!cleanPhone || !phoneRegex.test(cleanPhone)) { telefon.classList.add('error'); isValid = false; }
+
+            if (alamat.value.trim().length < 10) { alamat.classList.add('error'); isValid = false; }
+
+            const selected = Object.keys(productState).filter(id => productState[id].selected);
+            if (selected.length === 0) { document.getElementById('product-error').style.display = 'block'; isValid = false; }
+
+            if (!isValid) return showToast('Sila lengkapkan semua maklumat yang diperlukan.', 'error');
+
+            // Build WhatsApp message
+            const storeName = config.store.name || 'Kedai Kopi Digital';
+            let msg = '🛒 *PESANAN BARU — ' + storeName.toUpperCase() + '*\n';
+            msg += '━━━━━━━━━━━━━━━━━━━\n\n';
+            msg += '👤 *Nama:* ' + nama.value.trim() + '\n';
+            msg += '📱 *Telefon:* ' + telefon.value.trim() + '\n';
+            msg += '📍 *Alamat:* ' + alamat.value.trim() + '\n\n';
+            msg += '☕ *PESANAN:*\n';
+
+            let total = 0;
+            selected.forEach(id => {
+                const ps = productState[id];
+                const v = ps.variants[ps.selectedVariant];
+                const lineTotal = v.price * ps.qty;
+                total += lineTotal;
+                msg += '• ' + ps.name + ' (' + v.emoji + ' ' + ps.selectedVariant + ') x' + ps.qty + ' — RM ' + lineTotal.toFixed(2) + '\n';
+            });
+
+            msg += '\n💰 *JUMLAH: RM ' + total.toFixed(2) + '*\n\n';
+            msg += 'Terima kasih! Sila sahkan pesanan ini. 🙏';
+
+            const waUrl = 'https://wa.me/' + config.store.whatsapp + '?text=' + encodeURIComponent(msg);
+            showToast('Mengalihkan ke WhatsApp...', 'success');
+            setTimeout(() => window.open(waUrl, '_blank'), 600);
+        });
+
+        // Clear error on input
+        ['nama', 'telefon', 'alamat'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() { this.classList.remove('error'); });
+        });
 
         // ===== NAVBAR =====
         const navbar = document.getElementById('navbar');
@@ -1443,7 +1284,6 @@
             navLinks.classList.toggle('open');
         });
 
-        // Close mobile nav on link click
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('open');
@@ -1451,200 +1291,37 @@
             });
         });
 
-        // Active nav highlight
         function updateActiveNav() {
             const sections = document.querySelectorAll('section');
             const links = navLinks.querySelectorAll('a:not(.nav-cta)');
             let current = '';
-
             sections.forEach(section => {
                 const top = section.offsetTop - 100;
                 if (window.scrollY >= top) current = section.getAttribute('id');
             });
-
             links.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
             });
         }
 
-        // ===== INTERSECTION OBSERVER (Fade-in) =====
+        // ===== INTERSECTION OBSERVER =====
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // ===== PRODUCT SELECTION =====
-        document.querySelectorAll('.product-option').forEach(option => {
-            option.addEventListener('click', (e) => {
-                // Prevent toggling when clicking variant or qty buttons
-                if (e.target.closest('.variant-btn') || e.target.closest('.qty-btn')) return;
-
-                const checkbox = option.querySelector('input[type="checkbox"]');
-                checkbox.checked = !checkbox.checked;
-                option.classList.toggle('selected', checkbox.checked);
-
-                const productId = checkbox.value;
-                products[productId].selected = checkbox.checked;
-
-                updateSummary();
-            });
-        });
-
-        // ===== VARIANT SELECT =====
-        function selectVariant(btn, productId) {
-            const parent = btn.closest('.variant-select');
-            parent.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            products[productId].selectedVariant = btn.dataset.variant;
-
-            const price = parseFloat(btn.dataset.price);
-            const qty = products[productId].qty;
-            document.getElementById('price-' + productId).textContent = 'RM ' + (price * qty).toFixed(2);
-
-            updateSummary();
-        }
-
-        // ===== QUANTITY =====
-        function changeQty(productId, delta) {
-            const product = products[productId];
-            product.qty = Math.max(1, Math.min(20, product.qty + delta));
-            document.getElementById('qty-' + productId).textContent = product.qty;
-
-            // Update price display
-            const activeVariantBtn = document.querySelector('#opt-' + productId + ' .variant-btn.active');
-            const unitPrice = parseFloat(activeVariantBtn.dataset.price);
-            document.getElementById('price-' + productId).textContent = 'RM ' + (unitPrice * product.qty).toFixed(2);
-
-            updateSummary();
-        }
-
-        // ===== ORDER SUMMARY =====
-        function updateSummary() {
-            const summaryEl = document.getElementById('orderSummary');
-            const itemsEl = document.getElementById('summaryItems');
-            const totalEl = document.getElementById('summaryTotal');
-
-            let items = [];
-            let total = 0;
-
-            Object.keys(products).forEach(id => {
-                const p = products[id];
-                if (p.selected) {
-                    const unitPrice = p.variants[p.selectedVariant];
-                    const lineTotal = unitPrice * p.qty;
-                    total += lineTotal;
-                    const variantLabel = p.selectedVariant === 'panas' ? '🔥 Panas' : '🧊 Sejuk';
-                    items.push({
-                        name: p.name + ' (' + variantLabel + ') x' + p.qty,
-                        price: lineTotal
-                    });
-                }
-            });
-
-            if (items.length > 0) {
-                summaryEl.classList.add('visible');
-                itemsEl.innerHTML = items.map(item =>
-                    '<div class="summary-item"><span>' + item.name + '</span><span>RM ' + item.price.toFixed(2) + '</span></div>'
-                ).join('');
-                totalEl.textContent = 'RM ' + total.toFixed(2);
-            } else {
-                summaryEl.classList.remove('visible');
-            }
-
-            // Hide product error
-            document.getElementById('product-error').style.display = 'none';
-        }
-
-        // ===== FORM VALIDATION & SUBMIT =====
-        const form = document.getElementById('orderForm');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            let isValid = true;
-            const nama = document.getElementById('nama');
-            const telefon = document.getElementById('telefon');
-            const alamat = document.getElementById('alamat');
-
-            // Reset errors
-            [nama, telefon, alamat].forEach(el => el.classList.remove('error'));
-            document.getElementById('product-error').style.display = 'none';
-
-            // Validate name
-            if (nama.value.trim().length < 2) {
-                nama.classList.add('error');
-                isValid = false;
-            }
-
-            // Validate phone (Malaysian format: 01X-XXXXXXX or +601X-XXXXXXX)
-            const cleanPhone = telefon.value.replace(/[\s\-()]/g, '');
-            const phoneRegex = /^(\+?6?0)1[0-9]{8,9}$/;
-            if (!cleanPhone || !phoneRegex.test(cleanPhone)) {
-                telefon.classList.add('error');
-                isValid = false;
-            }
-
-            // Validate address
-            if (alamat.value.trim().length < 10) {
-                alamat.classList.add('error');
-                isValid = false;
-            }
-
-            // Validate product selection
-            const selectedProducts = Object.keys(products).filter(id => products[id].selected);
-            if (selectedProducts.length === 0) {
-                document.getElementById('product-error').style.display = 'block';
-                isValid = false;
-            }
-
-            if (!isValid) {
-                showToast('Sila lengkapkan semua maklumat yang diperlukan.', 'error');
-                return;
-            }
-
-            // Build WhatsApp message
-            let msg = '🛒 *PESANAN BARU — KEDAI KOPI DIGITAL*\n';
-            msg += '━━━━━━━━━━━━━━━━━━━\n\n';
-            msg += '👤 *Nama:* ' + nama.value.trim() + '\n';
-            msg += '📱 *Telefon:* ' + telefon.value.trim() + '\n';
-            msg += '📍 *Alamat:* ' + alamat.value.trim() + '\n\n';
-            msg += '☕ *PESANAN:*\n';
-
-            let total = 0;
-            selectedProducts.forEach(id => {
-                const p = products[id];
-                const unitPrice = p.variants[p.selectedVariant];
-                const lineTotal = unitPrice * p.qty;
-                total += lineTotal;
-                const variant = p.selectedVariant === 'panas' ? '🔥 Panas' : '🧊 Sejuk';
-                msg += '• ' + p.name + ' (' + variant + ') x' + p.qty + ' — RM ' + lineTotal.toFixed(2) + '\n';
-            });
-
-            msg += '\n💰 *JUMLAH: RM ' + total.toFixed(2) + '*\n\n';
-            msg += 'Terima kasih! Sila sahkan pesanan ini. 🙏';
-
-            const waUrl = 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(msg);
-
-            showToast('Mengalihkan ke WhatsApp...', 'success');
-
-            setTimeout(() => {
-                window.open(waUrl, '_blank');
-            }, 600);
-        });
-
-        // Clear error on input
-        ['nama', 'telefon', 'alamat'].forEach(id => {
-            document.getElementById(id).addEventListener('input', function() {
-                this.classList.remove('error');
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
@@ -1654,21 +1331,16 @@
             const icon = type === 'success' ? '✅' : '⚠️';
             toast.innerHTML = '<span>' + icon + '</span><span>' + message + '</span>';
             toast.className = 'toast ' + type + ' show';
-            setTimeout(() => toast.classList.remove('show'), 3500);
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.remove('show'), 3500);
         }
 
-        // ===== SMOOTH SCROLL OFFSET =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (!href || href === '#') return; // skip bare # links
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+        // ===== INIT =====
+        applyTheme();
+        renderStoreInfo();
+        renderMenuCards();
+        renderOrderProducts();
+        renderLocation();
     </script>
 </body>
 </html>
